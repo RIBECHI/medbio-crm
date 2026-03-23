@@ -16,7 +16,8 @@ export default function EditarClientePage({ params }: { params: { id: string } }
   useEffect(() => {
     supabase.from('clients').select('*').eq('id', params.id).single()
       .then(({ data }) => {
-        if (data) setForm({ display_name: data.display_name, email: data.email||'', phone: data.phone||'', cpf: data.cpf||'', dob: data.dob||'', address: data.address||'', notes: data.notes||'' })
+        const d = data as any
+        if (d) setForm({ display_name: d.display_name, email: d.email||'', phone: d.phone||'', cpf: d.cpf||'', dob: d.dob||'', address: d.address||'', notes: d.notes||'' })
         setLoading(false)
       })
     setLoading(true)
